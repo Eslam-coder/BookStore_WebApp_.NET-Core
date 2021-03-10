@@ -1,0 +1,7 @@
+﻿@model int   
+@{
+    ViewData["Title"] = "View";
+}
+
+<h1 class="alert alert-danger mt-3 mb-4">Error.. Book with Number @Model Not Found</h1>
+<a class="btn btn-success" asp-controller="Books" asp-action="Index">Click here...To show all books</a>

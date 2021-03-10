@@ -1,0 +1,59 @@
+﻿@model BookStore.ViewModels.LoginViewModel
+@{
+    ViewData["Title"] = "Register";
+}
+
+
+<div class="row">
+    <div class="col-md-6">
+        <h1>Login</h1>
+        <hr />
+        <form method="post" asp-action="Login" asp-controller="Account">
+            <div class="form-group">
+                <label asp-for="Email">Email</label>
+                <input type="email" asp-for="Email" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Password">Password</label>
+                <input type="password" asp-for="Password" class="form-control" />
+
+            </div>
+            <div class="form-group">
+                <div class="custom-checkbox">
+                    <label asp-for="RememberMe">
+                        <input asp-for="RememberMe" />
+                        @Html.DisplayNameFor(m => m.RememberMe)
+                    </label>
+                </div>
+            </div>
+            <div>
+                <button type="submit" class="btn btn-primary">Login</button>
+                <a asp-action="forgotPassword">forgotPassword?</a>
+            </div>
+
+        </form>
+
+    </div>
+    <div class="col-md-6">
+        <h1>External Login</h1>
+        <hr />
+        @if (Model.ExternalLogins.Count == 0)
+        {
+           <div>No External Login Configured</div>
+        }
+        <form method="post" asp-action="EternalLogin" asp-route-returnUrl="@Model.ReturnUrl">
+            <div>
+                @foreach (var provider in Model.ExternalLogins)
+                {
+                    <button type="submit" class="btn btn-primary" name="provider" 
+                            value="@provider.Name" title="login using your @provider.DisplayName account" >
+                     @provider.DisplayName</button>
+                }
+            </div>
+        </form>
+
+    </div>
+
+</div>
+
+

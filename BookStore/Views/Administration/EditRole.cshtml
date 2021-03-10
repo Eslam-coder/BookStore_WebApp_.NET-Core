@@ -1,0 +1,43 @@
+﻿@model BookStore.ViewModels.EditViewModel
+@{
+    ViewData["Title"] = "EditRoleAsync";
+}
+
+<h1>EditRoleAsync</h1>
+<form method="post">
+    <div class="form-group">
+        <label class="form-control" asp-for="ID"></label>
+        <input class="form-control" asp-for="ID" disabled/>
+    </div>
+    <div class="form-group">
+        <label asp-for="RoleName" class="form-control"></label>
+        <input class="form-control" asp-for="RoleName" />
+    </div>
+    <a asp-action="ListRoles" class="btn btn-primary">Cancel</a>
+    <button type="submit" class="btn btn-primary">Update</button>
+    <div class="card">
+        <div class="card-header">
+            <h3>Users in this role</h3>
+        </div>
+        <div class="card-body">
+            @if (Model.Users.Any())
+            {
+                foreach (var user in Model.Users)
+                {
+                    <h5 class="card-title">@user</h5>
+                }
+            }
+            else
+            {
+                <h5 class="card-title">None at the moment</h5>
+
+            }
+        </div>
+        <div class="card-footer">
+            <a asp-action="EditUsersInRoles" asp-controller="Administration" asp-route-id="@Model.ID" class="btn btn-primary">Add or Remove User</a>
+        </div>
+
+    </div>
+</form>
+
+

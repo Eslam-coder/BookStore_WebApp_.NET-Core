@@ -1,0 +1,69 @@
+﻿@model BookStore.ViewModels.EditUserViewModel
+@{
+    ViewData["Title"] = "EditUser";
+}
+
+<h1>EditUser</h1>
+
+<form method="post">
+    <div class="form-group">
+        <label class="form-control" asp-for="@Model.ID"></label>
+        <input class="form-control" asp-for="@Model.ID" disabled />
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.UserName" class="form-control"></label>
+        <input class="form-control" asp-for="@Model.UserName" />
+    </div>
+    <div class="form-group">
+        <label asp-for="@Model.Email" class="form-control"></label>
+        <input class="form-control" asp-for="@Model.Email" />
+    </div>
+    <a asp-action="ListUsers" class="btn btn-primary">Cancel</a>
+    <button type="submit" class="btn btn-primary">Update</button>
+    <div class="card">
+        <div class="card-header">
+            <h3>Users Roles</h3>
+        </div>
+        <div class="card-body">
+            @if (Model.Roles.Any())
+            {
+                foreach (var role in Model.Roles)
+                {
+                    <h5 class="card-title">@role</h5>
+                }
+            }
+            else
+            {
+                <h5 class="card-title">None at the moment</h5>
+
+            }
+        </div>
+        <div class="card-footer">
+            <a asp-action="ManageUserRoles" asp-controller="Administration" asp-route-userId="@Model.ID" class="btn btn-primary">Manage Roles</a>
+        </div>
+
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <h3>Users Claims</h3>
+        </div>
+        <div class="card-body">
+            @if (Model.Claims.Any())
+            {
+                foreach (var claim in Model.Claims)
+                {
+                    <h5 class="card-title">@claim</h5>
+                }
+            }
+            else
+            {
+                <h5 class="card-title">None at the moment</h5>
+
+            }
+        </div>
+        <div class="card-footer">
+            <a asp-action="ManageUserClaims" asp-controller="Administration" asp-route-userId="@Model.ID" class="btn btn-primary">Manage Claims</a>
+        </div>
+        </div>
+</form>
+

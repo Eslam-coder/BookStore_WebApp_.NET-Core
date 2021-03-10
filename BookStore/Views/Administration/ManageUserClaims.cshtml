@@ -1,0 +1,36 @@
+﻿@model BookStore.ViewModels.UserClaimsViewModel
+@{
+    ViewData["Title"] = "ManageUserClaims";
+    //var claimsList = (List<BookStore.ViewModels.UserClaimsViewModel>)ViewBag.model;
+}
+
+<h1>ManageUserClaims</h1>
+
+<form method="post">
+    <div class="card">
+        <div class="card-header">
+            <h3>Add or Rmove Users from this role</h3>
+        </div>
+        <div class="card-body">
+           
+            @for (int i = 0; i < Model.Claims.Count; i++)
+            {
+                <div>
+                    <input asp-for="@Model.Claims[i].ClaimType" hidden />
+                </div>
+                
+                <div>
+                    <input asp-for="@Model.Claims[i].IsSelected" class="form-check-input" />
+                    <label class="form-check-label" asp-for="@Model.Claims[i].IsSelected">@Model.Claims[i].ClaimType</label>
+                </div>
+
+            }
+        </div>
+        <div class="card-footer">
+            <input type="submit" value="Update" class="btn btn-primary" />
+            <a asp-action="EditeRole" asp-controller="Administration" asp-route-id="@*@roleId*@" class="btn btn-primary">Cancel</a>
+        </div>
+
+    </div>
+</form>
+
